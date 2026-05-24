@@ -29,7 +29,7 @@ def error_map(pred: np.ndarray, truth: np.ndarray, fov: np.ndarray | None = None
     return out
 
 
-def comparison_panel(rgb, truth, pred, fov=None, title=""):
+def comparison_panel(rgb, truth, pred, fov=None, title="", pred_label="Predykcja"):
     """Panel 1x4: obraz | maska ekspercka | predykcja | mapa błędów."""
     fig, axes = plt.subplots(1, 4, figsize=(20, 5.5))
     axes[0].imshow(rgb)
@@ -37,7 +37,7 @@ def comparison_panel(rgb, truth, pred, fov=None, title=""):
     axes[1].imshow(np.asarray(truth) > 0, cmap="gray")
     axes[1].set_title("Maska ekspercka (GT)")
     axes[2].imshow(np.asarray(pred) > 0, cmap="gray")
-    axes[2].set_title("Predykcja (3.0)")
+    axes[2].set_title(pred_label)
     axes[3].imshow(error_map(pred, truth, fov))
     axes[3].set_title("Mapa błędów\nTP=zielony FP=czerwony FN=niebieski")
     for ax in axes:
